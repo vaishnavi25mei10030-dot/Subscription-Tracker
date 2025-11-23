@@ -1,0 +1,140 @@
+import datetime
+subscriptions = []
+
+def days_left(date_str):
+    #Calculate how many days remaining for due date.
+    y, m, d = map(int, date_str.split("-"))
+    due = datetime.date(y, m, d)
+    today = datetime.date.today()
+    return (due - today).days
+
+# Core
+
+def add_subscription():
+    print("\n--- Add Subscription ---")
+    name = input("Name: ")
+    amount = input("Amount: ")
+    cycle = input("Cycle (monthly/weekly/yearly): ")
+    due_date = input("Next due date (YYYY-MM-DD): ")
+    status = "active"
+
+    subscriptions.append([name, amount, cycle, due_date, status])
+    print("Added!")
+
+def view_subscriptions():
+    print("\n--- All Subscriptions ---")
+    if not subscriptions:
+        print("No subscriptions yet.")
+        return
+
+    for sub in subscriptions:
+        name, amount, cycle, date, status = sub
+        left = days_left(date)
+
+        if left <= 5:
+            print(f"*DUE SOON* {name} - {amount} - {cycle} - Due: {date} ({left} days) - {status}")
+        else:
+            print(f"{name} - {amount} - {cycle} - Due: {date} ({left} days) - {status}")
+
+def delete_subscription():
+    print("\n--- Delete Subscription ---")
+    name = input("Enter name to delete: ")
+
+    found = False
+    for sub in subscriptions:
+        if sub[0].lower() == name.lower():
+            subscriptions.remove(sub)
+            found = True
+            break
+
+    print("Deleted!" if found else "Not found.")
+
+def pause_resume_subscription():
+    print("\n--- Pause/Resume Subscription ---")
+    name = input("Enter name: ")
+
+    found = False
+    for sub in subscriptions:
+        if sub[0].lower() == name.lower():
+            found = True
+            if sub[4] == "active":
+                sub[4] = "paused"
+                print("Subscription paused!")
+            else:
+                sub[4] = "active"
+                print("Subscription resumed!")
+
+    if not found:
+        print("Subscription not found.")
+    else:
+        # in-memory list is updated automatically
+        pass
+
+def change_amount():
+    print("\n--- Change Subscription Amount ---")
+    name = input("Enter name: ")
+    new_amount = input("Enter new amount: ")
+
+    found = False
+
+    for sub in subscriptions:
+        if sub[0].lower() == name.lower():
+            found = True
+            sub[1] = new_amount
+
+    if found:
+        print("Amount updated!")
+    else:
+        print("Subscription not found.")
+
+def search_subscription():
+    print("\n--- Search Subscription ---")
+    name = input("Enter name to search: ")
+
+    found = False
+
+    for sub in subscriptions:
+        if name.lower() in sub[0].lower():
+            found = True
+            print(f"{sub[0]} - {sub[1]} - {sub[2]} - Due: {sub[3]} - {sub[4]}")
+
+    if not found:
+        print("No results found.")
+
+# -------------------------
+# Main Menu
+# -------------------------
+
+def main():
+    while True:
+        print("\n==== Subscription Tracker ====")
+        print("1. Add Subscription")
+        print("2. View All Subscriptions")
+        print("3. Delete Subscription")
+        print("4. Pause/Resume Subscription")
+        print("5. Change Subscription Amount")
+        print("6. Search by Name")
+        print("7. Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            add_subscription()
+        elif choice == "2":
+            view_subscriptions()
+        elif choice == "3":
+            delete_subscription()
+        elif choice == "4":
+            pause_resume_subscription()
+        elif choice == "5":
+            change_amount()
+        elif choice == "6":
+            search_subscription()
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == '__main__':
+    main()
