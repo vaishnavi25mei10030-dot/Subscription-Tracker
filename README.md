@@ -75,13 +75,34 @@ Today's due subscriptions
 • Subscriptions that are past due
 Tests confirm that the program handles all cases correctly.
 
+⭐ Screenshots
+
+Screenshots demonstrating program output (adding, updating, deleting,
+searching, pausing, exiting) can be found inside:
+
+These images visually represent the functionality and correctness of the
+system.
+
+![](media/image1.jpg){width="6.268055555555556in"
+height="2.1618055555555555in"}
+
+![](media/image2.jpg){width="6.268055555555556in"
+height="4.434027777777778in"}
+
+![](media/image3.jpg){width="6.268055555555556in"
+height="4.008333333333334in"}
+
+![](media/image4.jpg){width="6.268055555555556in"
+height="5.0784722222222225in"}
+
+![](media/image5.jpg){width="5.825in" height="2.5166666666666666in"}
 
 
 
+ 
+ 
+ 
+ 
+ 
 
- 
- 
- 
- 
- 
 
